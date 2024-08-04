@@ -1,7 +1,9 @@
+// import libraries
 const { nanoid } = require("nanoid");
 const notes = require("./notes");
 const { request } = require("express");
 
+// create function to add note
 const addNoteHandler = (request, h) => {
   const { title, tags, body } = request.payload;
 
@@ -22,6 +24,7 @@ const addNoteHandler = (request, h) => {
 
   const isSuccess = notes.filter((note) => note.id === id).length > 0;
 
+  // define function flow here
   if (isSuccess) {
     const response = h.response({
       status: "success",
@@ -42,6 +45,7 @@ const addNoteHandler = (request, h) => {
   return response;
 };
 
+// function to retrive all note
 const getAllNotesHandler = () => ({
   status: "success",
   data: {
@@ -49,6 +53,7 @@ const getAllNotesHandler = () => ({
   },
 });
 
+// get note by id function
 const getNoteByIdHandler = (request, h) => {
   const { id } = request.params;
 
@@ -71,6 +76,7 @@ const getNoteByIdHandler = (request, h) => {
   return response;
 };
 
+// function to edit note by id
 const editNoteByIdHandler = (request, h) => {
   const { id } = request.params;
 
@@ -104,6 +110,7 @@ const editNoteByIdHandler = (request, h) => {
   return response;
 };
 
+// function to delete note
 const deleteNoteByIdHandler = (request, h) => {
   const { id } = request.params;
 
@@ -127,6 +134,7 @@ const deleteNoteByIdHandler = (request, h) => {
   return response;
 };
 
+// export all function
 module.exports = {
   addNoteHandler,
   getAllNotesHandler,
